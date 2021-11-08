@@ -50,12 +50,12 @@ async function run() {
       const email = req.query.email
       const date = new Date(req.query.date).toLocaleDateString()
       const query = { email: email, date: date }
-      if (query) {
-        const cursor = appointmentCollection.find(query)
-      }
-      const cursor = appointmentCollection.find({})
+
+      const cursor = appointmentCollection.find(query || {})
       const result = await cursor.toArray()
       res.json(result)
+
+
     })
 
     app.post('/appointments', async (req, res) => {
